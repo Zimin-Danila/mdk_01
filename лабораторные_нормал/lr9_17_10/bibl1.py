@@ -6,8 +6,12 @@ import pickle
      
 class Biblioteki_city(): #Создание библиотек с переменными: кол-во книг, номер библиотеки
     def __init__(self, book_in, nomer):
-        self.book_in = book_in
+        
         self.nomer = nomer
+        if not isinstance(book_in, str):
+            self.book_in = book_in
+        else:                                   
+            raise InvalidNameError(book_in)
 
 #Конструктор 
     def books(self): #  Вывод информации о количестве всех книгах из определенной библиотеки
@@ -39,11 +43,24 @@ class Biblioteki_city(): #Создание библиотек с перемен�
 class Biblioteka(Biblioteki_city):
     def __init__(self,book_in,nomer, name, kolvo_otdelov):
         super().__init__(book_in, nomer)
-        self.name = name
+            # Частная переменная
+        self.__name = name
         self.kolvo_otdelov = kolvo_otdelov
+        
+    #Свойство
+    @property
+    def nazv(self):
+        print(self.__name)
 
+        # Частный метод
     def Nazvanie(self):
-        print(f"Название данной библиотеки {self.name}")
+        #if not isinstance(self.__name, str):
+            #raise TypeError('Название должно быть только из букв!')
+        #else:
+            print(f"Название данной библиотеки {self.__name}")
+            
+
+        
 
     def Otdelbi(self):
         x = (self.book_in // 500)+1
@@ -52,21 +69,32 @@ class Biblioteka(Biblioteki_city):
     #Полиморфизм
     def books(self):
         print(f"Количество книг в этой библиотеке: {self.book_in} шт.")
-b1 = Biblioteki_city(1000, 1)
-b2 = Biblioteki_city(14999, 2)
-b3 = Biblioteki_city(364, 3)
-b4 = Biblioteki_city(8564, 4)
-print(b1.books())
-b2 = Biblioteka(b2.book_in, b2.nomer, "Florida", 1)
-b2.Nazvanie()
-b2.Otdelbi()
-b2.books()
+
+class InvalidNameError(Exception):
+    def __init__(self, book_in):
+        self.book_in = book_in
+
+    def __str__(self):
+        return f"Не должно быть цифр!"
+
+try:
+    b1 = Biblioteki_city(1000, 1)
+    b2 = Biblioteki_city("14999", 2)
+    b3 = Biblioteki_city(364, 3)
+    b4 = Biblioteki_city(8564, 4)
 
 
+    print(b1.books())
+    b2 = Biblioteka(b2.book_in, b2.nomer, "Florida", 1)
+    b2.Nazvanie()
+    b2.Otdelbi()
+    b2.books()
+    b1.serialize()
+    print(b1.deserialize())
+    b4.serialize()
+    print(b4.deserialize())
+    #del b1
+except InvalidNameError as e:
+    print(e)
 
 
-b1.serialize()
-print(b1.deserialize())
-b4.serialize()
-print(b4.deserialize())
-#del b1
