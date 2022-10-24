@@ -1,7 +1,8 @@
+from multipledispatch import dispatch
 import pickle
 counter = 0
-class Libraries(): 
-    """Класс "Библиотеки" с переменными: название, адрес,город"""
+class Libraries(): #Класс "Библиотеки" с переменными: название, адрес,город.
+    
     def __init__(self, name, adress, city):
         self.name = name
         self.adress = adress
@@ -22,9 +23,10 @@ class Libraries():
         pass
 
 
-class Reading_rooms(): #
-    """Класс "Читательные залы" с переменными: название читательного зала, библиотека, 
-    количество единиц литературы, количество посадочных мест, ремя работы, этаж, количество сотрудников."""
+class Reading_rooms(): #Класс "Читательные залы" с переменными: название читательного зала, 
+                       #библиотека, количество единиц литературы, количество посадочных мест, 
+                       #время работы, этаж, количество сотрудников.
+    """Класс читательные залы с какими-либо объектами"""
     counter = 0
     def __init__(self, nameRr, lib, am_books, am_place, wk_time, floor, am_worker):
         
@@ -56,6 +58,21 @@ class Reading_rooms(): #
     @property
     def libr(self):
         return self.__lib
+
+    @dispatch(int, int)
+    def booksp(self, x1, x2): #  Вывод информации о количестве всех книгах из определенной библиотеки
+        x =   x1 + x2
+        print (f"Суммарное количество книг в читательном зале <<{self.nameRr}>> равно {x}")
+
+    @dispatch(float, float)
+    def booksp(self, pi, vo): #  Вывод информации о количестве всех книгах из определенной библиотеки
+        x =  pi + vo 
+        print (f"Суммарное количество книг в читательном зале <<{self.nameRr}>> равно {x}")
+
+    @dispatch(int, int, float, float)
+    def booksp(self, x1, x2, x3, x4): #  Вывод информации о количестве всех книгах из определенной библиотеки
+        x =  x1 + x2 + x3 + x4
+        print (f"Суммарное количество книг в читательном зале <<{self.nameRr}>> равно {x}")
 
     def books(self): #  Вывод информации о количестве всех книгах из определенной библиотеки
         x =  b1.am_books + b2.am_books + b3.am_books + b4.am_books
@@ -95,7 +112,6 @@ class Reading_rooms(): #
 
 
 class Human():
-    """Класс "Человек" с переменными: фамилия, имя, отчество, возраст"""
     def __init__(self, surname = "Зимин", name="Данила", patronymic="Викторович", age="18"):
         self.surname = surname
         self.name = name
@@ -106,9 +122,8 @@ class Human():
         return (self.surname[0]+self.name[0]+self.patronymic[0])
 
 
-class Readers():
-    """Класс "Читатели" с переменными: фамилия, имя, отчество, возраст, 
-    категория читателя, место работы или учебы, дата регистрации в библиотеке"""
+class Readers(): #Класс "Читатели" с переменными: фамилия, имя, отчество, возраст, 
+                 #категория читателя, место работы или учебы, дата регистрации в библиотеке.
     def __init__(self, initil, surname = "Зимин", name="Данила", patronymic="Викторович", age="18", rd_ctg="Начинающий", dt_rg="01.08.2020"):
         self.reader = Human(surname, name, patronymic, age)#Ассоциация
         self.rd_ctg = rd_ctg
@@ -125,9 +140,8 @@ class Readers():
     def LevelUp(self, level):
         self.rd_ctg = level
         print(f'Вы повышены! Ваша категория - {self.rd_ctg}')
-class Literature(): 
-    """Класс "Литература" с переменными: название, категория литературы, 
-    автор, издательство, год издательства, количество страниц, читательный зал"""
+class Literature(): #Класс "Литература" с переменными: название, категория литературы, 
+                    #автор, издательство, год издательства, количество страниц, читательный зал.
     def __init__(self, name, ctg_lt, author, publisher, yr_pub, am_page, read_room):
         self.name = name
         self.ctg_lt = ctg_lt
@@ -137,9 +151,8 @@ class Literature():
         self.am_page = am_page
         self.read_room = read_room
 
-class Lt_output(): 
-    """Класс "Выдача литературы" с переменными: читатель, литература, 
-    дата выдачи, срок выдачи, вид выдачи, наличие залога."""
+class Lt_output(): #Класс "Выдача литературы" с переменными: читатель, литература, 
+                   #дата выдачи, срок выдачи, вид выдачи, наличие залога.
     def __init__(self, reader, liter, dt_out, pd_out, type_out, collaterel=None):
         self.reader = reader
         self.liter = liter
@@ -149,7 +162,6 @@ class Lt_output():
         self.collaterel = collaterel
 
 class Book(Reading_rooms):
-    """Дочерний класс "Книга" с дополнительными переменными: количество страниц"""
     def __init__(self, nameRr, lib, am_books, am_place, wk_time, floor, am_worker, am_page):
         super().__init__(nameRr, lib, am_books, am_place, wk_time, floor, am_worker)
         self.am_page = am_page
@@ -184,10 +196,16 @@ try:
     b6 = Libraries("Ленин", "Колотушкина 1", "Мухово")
     h2 = Human()
     h1 = Readers(h2)
+    #Перегрузка операторов
+    b1.booksp(12, 45)
+    b2.booksp(3.14, 0.86)
+    b3.booksp(3333, 666, 3.33, 1.77)
+
+
     #print(h1)
     #h1.LevelUp("Опытный")
     #print(h1)
-    print(h1.Categori())
+    #print(h1.Categori())
     #b1.Pl()
     #b1(187)
     #b1.Pl()
@@ -207,7 +225,7 @@ try:
     #b2 = Book(b2.nameRr, "Ленинская", b2.am_books, b2.am_place, b2.wk_time, b2.floor, b2.am_worker, 1054)
     #b2.Symbols()
     #b2.books()
-    
+    #Методы проекта
     #print(b1.Name())
     #print(b1.books())
     #del b1
