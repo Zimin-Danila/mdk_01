@@ -1,4 +1,3 @@
-from shelve import Shelf
 from multipledispatch import dispatch
 import pickle
 from abc import ABC
