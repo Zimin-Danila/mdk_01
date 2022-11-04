@@ -7,8 +7,6 @@ from typing import NamedTuple
 
 counter = 0
 
-
-
 class Building(ABC):
     """Класс "Строение" с абстрактными методами: описание, конец рабочего дня, получить информацию"""
     @abstractmethod
@@ -121,7 +119,7 @@ class Reading_rooms():
             pickle.dump(self.wk_time, f)
         f.closed
 
-#Десериализация
+    #Десериализация
     def deserialize(self): #Десериализация номера библиотеки
         with open('C:\\Programming\\mdk_01\\лабораторные_нормал\\lr4_12_10\\test_pickuli.pkl', 'rb') as f:
             biblioteki = pickle.load(f)
@@ -138,10 +136,10 @@ class Place_book:
     number_place: int
 
     
-def Get_place_books():
+def Get_place_books() -> Place_book:
     return 'Полное местоположение книги:', Place_book(48, 86, 61)
 
-def Get_place_book():
+def Get_place_book() -> Place_book:
     return Place_book(12, 20, 40)
     #Конец датакласса
 
@@ -165,10 +163,6 @@ def Get_place_book():
 
     #def __del__(self): # Уничтожение экземпляра
             #print(f"На библиотеку <<{self.lib}>> упал метеорит ☺")
-        
-
-
-
 
 class Human():
     """Класс "Человек" с переменными: фамилия, имя, отчество, возраст"""

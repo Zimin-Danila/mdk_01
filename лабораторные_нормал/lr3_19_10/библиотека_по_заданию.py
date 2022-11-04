@@ -183,12 +183,12 @@ try:
     #print(h1)
     #h1.LevelUp("Опытный")
     #print(h1)
-    print(h1.Categori())
-    #b1.Pl()
-    #b1(187)
-    #b1.Pl()
-    #b1 + 8
-    #b1.Pl()
+    #print(h1.Categori())
+    b1.Pl() #150
+    b1(187) #187
+    b1.Pl() #187
+    b1 + 8 #195
+    b1.Pl() #195
     #print(Reading_rooms.__doc__)
 
     #lib1.ff()
