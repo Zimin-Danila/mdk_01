@@ -344,7 +344,7 @@ try:
     book1 = Book(b2.nameRr, "Ленинская", b2.am_books, b2._am_place, b2.wk_time, b2.floor, b2.am_worker, 1054)
     #Начало использования регулярных выражений
     user1 = Input_system()
-    user2 = Input_system()
+    # user2 = Input_system()
     #Конец использования регулярных выражений
     
         #Методы проекта

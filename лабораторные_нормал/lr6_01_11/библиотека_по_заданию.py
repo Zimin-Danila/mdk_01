@@ -126,26 +126,10 @@ class Reading_rooms():
         f.closed
         print(biblioteki)
 
-    #Реализация датакласса
-    #Данный датакласс приписан к классу <<Читательные залы>>
-@dataclass
-class Place_book:
-    """Класс "местоположение книги" с переменными: номер шкафа, номер полки, номер места"""
-    number_wardrob: int
-    number_shelf: int
-    number_place: int
-
-    
-def Get_place_books() -> Place_book:
-    return 'Полное местоположение книги:', Place_book(48, 86, 61)
-
-def Get_place_book() -> Place_book:
-    return Place_book(12, 20, 40)
-    #Конец датакласса
-
-    #Применение кортежей для реализации структуры
-    #Данный кортеж приписан к классу <<Читательные залы>>
-# class Place_book(NamedTuple):
+#     #Реализация датакласса
+#     #Данный датакласс приписан к классу <<Читательные залы>>
+# @dataclass
+# class Place_book:
 #     """Класс "местоположение книги" с переменными: номер шкафа, номер полки, номер места"""
 #     number_wardrob: int
 #     number_shelf: int
@@ -157,6 +141,22 @@ def Get_place_book() -> Place_book:
 
 # def Get_place_book() -> Place_book:
 #     return Place_book(12, 20, 40)
+#     #Конец датакласса
+
+    #Применение кортежей для реализации структуры
+    #Данный кортеж приписан к классу <<Читательные залы>>
+class Place_book(NamedTuple):
+    """Класс "местоположение книги" с переменными: номер шкафа, номер полки, номер места"""
+    number_wardrob: int
+    number_shelf: int
+    number_place: int
+
+    
+def Get_place_books() -> Place_book:
+    return 'Полное местоположение книги:'
+
+def Get_place_book() -> Place_book:
+    return Place_book(12, 20, 40)
 
     #Окончание примения кортежа длля реализации структуры
 
@@ -262,23 +262,23 @@ try:
         #Методы проекта
 #Использование датакласса
 
-    print(Get_place_books())
-    print("Полное метоположение книги:", Get_place_book())
-    print("Номер шкафа:", Get_place_book().number_wardrob)
-    print("Номер полки:",Get_place_book().number_shelf)
-    print("Номер места:",Get_place_book().number_place)
+    # print(Get_place_books())
+    # print("Полное метоположение книги:", Get_place_book())
+    # print("Номер шкафа:", Get_place_book().number_wardrob)
+    # print("Номер полки:",Get_place_book().number_shelf)
+    # print("Номер места:",Get_place_book().number_place)
 
 #Окончание использования датакласса
 
 #Использование кортежей
-    # kniga = Get_place_book()
-    # kniga1 = Get_place_books()
-    # print(f"Полное местоположение книги:", kniga)
-    # print(f"Шкаф:", kniga.number_wardrob) 
-    # print(f"Полка:", kniga.number_shelf) 
-    # print(f"Место:", kniga.number_place) 
+    kniga = Place_book(50, 92, 611)
+    kniga1 = Place_book(54, 92, 611)
+    print(f"Полное местоположение книги:", kniga)
+    print(f"Шкаф:", kniga.number_wardrob) 
+    print(f"Полка:", kniga.number_shelf) 
+    print(f"Место:", kniga.number_place) 
 
-    # print(f"Полное местоположение книги:", kniga1)
+    print(f"Полное местоположение книги:", kniga1)
 
 #Окончание использования кортежей
 
